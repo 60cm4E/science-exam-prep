@@ -53,9 +53,16 @@ function initChart() {
 
 function updateVisuals(distance) {
     distanceVal.textContent = distance;
-    const baseTranslate = (distance - 10) * 10;
+    // 화면 크기에 따라 이동 반경(multiplier) 조절
+    const isMobile = window.innerWidth <= 768;
+    const multiplier = isMobile ? 3 : 10;
+    const baseTranslate = (distance - 10) * multiplier;
     cup.style.transform = `translateX(${baseTranslate}px)`;
 }
+
+window.addEventListener('resize', () => {
+    if(distanceSlider) updateVisuals(distanceSlider.value);
+});
 
 if(distanceSlider) {
     distanceSlider.addEventListener('input', (e) => updateVisuals(e.target.value));
