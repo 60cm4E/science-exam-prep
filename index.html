@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지구의 온도 조절기: 복사 평형과 온난화</title>
+    <meta name="description" content="중학교 3학년 과학 수행평가 대비 - 복사 평형과 지구 온난화">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🌍 온도 조절기</div>
+            <ul class="nav-links">
+                <li><a href="#lab">가상 실험실</a></li>
+                <li><a href="#dual">지구 vs 달</a></li>
+                <li><a href="#story">온난화 스토리</a></li>
+                <li><a href="#summit">모의 UN</a></li>
+                <li><a href="#action">나의 실천</a></li>
+                <li><a href="#exam">모의고사</a></li>
+            </ul>
+        </nav>
+        <div class="hero">
+            <h1>지구의 온도 조절기</h1>
+            <p>복사 평형과 지구 온난화, 직접 체험하며 완벽하게 대비하자!</p>
+            <a href="#lab" class="btn-primary">시작하기</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. 가상 실험실: 복사 평형 시뮬레이션 -->
+        <section id="lab" class="section glass">
+            <h2>🧪 가상 실험실: 복사 평형 시뮬레이션</h2>
+            <p class="desc">광원(적외선등)과 알루미늄 컵 사이의 거리를 조절해 보세요.</p>
+            <div class="lab-container">
+                <div class="lab-visual">
+                    <div class="light-bulb" id="lightBulb">💡</div>
+                    <div class="distance-line"></div>
+                    <div class="cup" id="cup">🥛</div>
+                </div>
+                <div class="controls">
+                    <label for="distanceSlider">광원과의 거리 (<span id="distanceVal">10</span>cm)</label>
+                    <input type="range" id="distanceSlider" min="5" max="30" value="10" step="1">
+                    <button id="startExpBtn" class="btn-action">실험 시작</button>
+                    <button id="resetExpBtn" class="btn-secondary">초기화</button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="equilibriumChart"></canvas>
+                </div>
+                <div class="explanation glass-card" id="labExplanation">
+                    <h3>실험 결과 분석</h3>
+                    <p><strong>복사 평형이란?</strong> 물체가 흡수하는 복사 에너지 양과 방출하는 복사 에너지 양이 같아져 온도가 일정하게 유지되는 상태입니다.</p>
+                    <p>거리가 <span class="highlight">멀어질수록</span> 단위 면적당 도달하는 에너지가 줄어들어, 평형 온도가 <span class="highlight">낮아지고</span> 도달 시간도 <span class="highlight">길어집니다</span>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 지구 vs 달 -->
+        <section id="dual" class="section glass">
+            <h2>🌗 듀얼 뷰: 지구 vs 달의 표면 온도</h2>
+            <p class="desc">대기의 유무가 어떤 차이를 만들까요?</p>
+            <div class="dual-container">
+                <div class="planet-card earth-card" onclick="toggleEarthAnimation()">
+                    <h3>지구 (Earth)</h3>
+                    <div class="planet-visual earth-visual">
+                        <div class="atmosphere" id="earthAtmosphere">대기층</div>
+                        <div class="energy-arrows">
+                            <div class="arrow in">☀️ 태양 복사</div>
+                            <div class="arrow out partial">지구 방출</div>
+                            <div class="arrow return">♻️ 온실 효과 (재방출)</div>
+                        </div>
+                    </div>
+                    <p class="temp">평균 약 15℃ (따뜻함)</p>
+                    <p class="reason">온실 기체가 열을 가둬두는 <strong>온실 효과</strong> 덕분에 생명체가 살기 적합합니다.</p>
+                </div>
+                <div class="planet-card moon-card">
+                    <h3>달 (Moon)</h3>
+                    <div class="planet-visual moon-visual">
+                        <div class="energy-arrows">
+                            <div class="arrow in">☀️ 태양 복사</div>
+                            <div class="arrow out full">전부 방출</div>
+                        </div>
+                    </div>
+                    <p class="temp">극심한 일교차 (대기 없음)</p>
+                    <p class="reason">대기가 없어 흡수한 에너지를 바로 우주로 <strong>모두 방출</strong>합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 스토리텔링: 온난화의 나비효과 -->
+        <section id="story" class="section glass">
+            <h2>📉 온난화의 나비효과</h2>
+            <p class="desc">하나의 변화가 전 지구적 재난으로 이어지는 과정을 확인하세요.</p>
+            <div class="timeline-container">
+                <div class="timeline-step" onclick="revealStep(1)">
+                    <div class="step-icon">🏭</div>
+                    <div class="step-content glass-card hidden-content" id="step1">
+                        <h3>1. 화석 연료 사용 증가</h3>
+                        <p>산업 발달로 온실 기체(이산화탄소 등) 배출 급증</p>
+                    </div>
+                </div>
+                <div class="timeline-step" onclick="revealStep(2)">
+                    <div class="step-icon">🌡️</div>
+                    <div class="step-content glass-card hidden-content" id="step2">
+                        <h3>2. 지구 평균 기온 상승</h3>
+                        <p>강화된 온실 효과로 지구가 뜨거워짐 (지구 온난화)</p>
+                    </div>
+                </div>
+                <div class="timeline-step" onclick="revealStep(3)">
+                    <div class="step-icon">🧊</div>
+                    <div class="step-content glass-card hidden-content" id="step3">
+                        <h3>3. 영구동토층 해빙</h3>
+                        <p>추운 지역의 언 땅이 녹으며 강력한 온실 기체인 <span class="highlight">메테인 대량 방출</span> (양의 되먹임)</p>
+                    </div>
+                </div>
+                <div class="timeline-step" onclick="revealStep(4)">
+                    <div class="step-icon">🌊</div>
+                    <div class="step-content glass-card hidden-content" id="step4">
+                        <h3>4. 전 지구적 환경 시스템 붕괴</h3>
+                        <p>대륙 빙하 융해로 해수면 상승, 기상이변 상시화, 생태계 및 식량 위기 초래</p>
+                    </div>
+                </div>
+            </div>
+            <p class="hint-text">아이콘을 클릭하여 다음 단계를 확인하세요!</p>
+        </section>
+
+        <!-- 4. 모의 UN 기후 회담 -->
+        <section id="summit" class="section glass">
+            <h2>⚖️ 모의 UN 기후 회담</h2>
+            <p class="desc">국제 협상 과정의 갈등과 해결 방안을 찾아보세요.</p>
+            <div class="summit-container">
+                <div class="debate-stage">
+                    <div class="country developed">
+                        <div class="avatar">🤵</div>
+                        <div class="speech-bubble">
+                            "중국, 인도 등 현재 배출량이 많은 신흥국도<br>대대적으로 온실가스를 감축해야 합니다!"
+                            <br><small>- 선진국 입장</small>
+                        </div>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="country developing">
+                        <div class="avatar">👷</div>
+                        <div class="speech-bubble">
+                            "현재 위기는 과거 선진국의 '역사적 책임'입니다.<br>빈곤 퇴치를 위한 '경제 발전권'을 보장하세요!"
+                            <br><small>- 개발도상국 입장</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="solution-cards">
+                    <h3>💡 갈등 해결을 위한 핵심 열쇠 (클릭해서 확인)</h3>
+                    <div class="cards-grid">
+                        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                            <div class="front">녹색기후기금(GCF)</div>
+                            <div class="back">선진국이 개도국의 기후 재난 대응과 저탄소 전환을 위해 재정 및 인프라를 지원하는 기금</div>
+                        </div>
+                        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                            <div class="front">기술 이전</div>
+                            <div class="back">선진국의 고효율 재생 에너지 기술을 개도국에 적극 제공하여 상호 발전 도모</div>
+                        </div>
+                        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                            <div class="front">정의로운 전환</div>
+                            <div class="back">화석 연료 퇴출 과정에서 타격을 입는 개도국이나 노동자를 보호하기 위한 원칙</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 나의 실천 다이어리 -->
+        <section id="action" class="section glass">
+            <h2>✅ 나의 실천 체크리스트</h2>
+            <p class="desc">우리의 작은 실천이 모이면 지구를 살릴 수 있습니다. 실천 가능한 항목을 체크해보세요!</p>
+            <div class="action-container">
+                <div class="checklist">
+                    <label class="check-item"><input type="checkbox" onchange="updateEarthHealth()"> <span>여름철 냉방 2℃ 올리고, 겨울철 난방 2℃ 낮추기</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateEarthHealth()"> <span>빈 교실 불 끄기 및 대기 전력 차단하기</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateEarthHealth()"> <span>일회용품 대신 개인 텀블러 사용하기</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateEarthHealth()"> <span>교복 물려주기(아나바다)로 자원 순환하기</span></label>
+                    <label class="check-item"><input type="checkbox" onchange="updateEarthHealth()"> <span>급식 남기지 않고 도보/대중교통 이용하기</span></label>
+                </div>
+                <div class="earth-health-visual">
+                    <div id="healthEarth" class="health-earth sick">🤒</div>
+                    <div class="health-bar-container">
+                        <div id="healthBar" class="health-bar"></div>
+                    </div>
+                    <p id="healthStatus">지구가 아파요... 실천 항목을 체크해주세요!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 파이널 모의고사 -->
+        <section id="exam" class="section glass">
+            <h2>📝 수행평가 파이널 모의고사</h2>
+            <p class="desc">카드를 클릭하여 정답을 확인하고 암기하세요! (스스로 점검하기 완벽 반영)</p>
+            <div class="exam-grid">
+                <!-- Flashcards will be generated by JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
